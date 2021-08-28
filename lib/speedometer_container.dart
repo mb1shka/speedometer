@@ -68,13 +68,13 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
 
 
 
-  int _currentIndex = 1;
+  /*int _currentIndex = 1;
 
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-  }
+  }*/
 
   /*static const List<Widget> _pages = <Widget>[
     //MaterialPageRoute
@@ -87,7 +87,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
       appBar: AppBar(
         title: const Text("Speedometer"),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
@@ -105,7 +105,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             label: "Profile",
           ),
         ],
-      ),
+      ),*/
       backgroundColor: Colors.black,
       body: Stack(
         children: [
