@@ -47,21 +47,21 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
     //contains data about the device's location, including speed in meters/second
   }
 
-  @override
-  void initState() {
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      // Getting callbacks when position is changing
-      speed = currentLocation.speed!;
-    });
-    super.initState();
-  }
-
-  void _highestSpeedTracking(double speed) {
+  void _speedTracking(LocationData currentLocation) {
     setState(() {
+      speed = currentLocation.speed!;
       if (speed > highestSpeed) {
         highestSpeed = speed;
       }
     });
+  }
+
+  @override
+  void initState() {
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      _speedTracking(currentLocation);
+    });
+    super.initState();
   }
 
   @override

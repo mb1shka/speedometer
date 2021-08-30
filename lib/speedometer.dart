@@ -21,7 +21,7 @@ class Speedometer extends StatelessWidget {
       size: Size(size, size),
       painter: SpeedPainter(
         speed: speed,
-        speedRecord: speedRecord
+        speedRecord: speedRecord,
       ),
     );
   }
