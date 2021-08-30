@@ -1,5 +1,4 @@
 import 'package:speedometer/pages/speedometer_page.dart';
-import 'package:speedometer/speedometer_container.dart';
 
 import 'package:flutter/material.dart';
 
