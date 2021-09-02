@@ -1,3 +1,4 @@
+import 'package:speedometer/pages/settings_page.dart';
 import 'package:speedometer/pages/speedometer_page.dart';
 
 import 'package:flutter/material.dart';
@@ -54,9 +55,7 @@ class _TheOnlyWidgetState extends State<TheOnlyWidget> {
       'Index 1: Speedometer',
     ),*/
     SpeedometerPage(),
-    Text(
-      'Index 2: Profile',
-    ),
+    SettingsPage(),
     //TODO: вместо текстовых виджетов добавить в список три разных страницы
   ];
   //тут мы сделали список виджетов, которые пока что будут нам заменять страницы,
