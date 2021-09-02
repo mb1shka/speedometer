@@ -124,7 +124,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             alignment: Alignment.bottomCenter,
 
             child: Text(
-              "Highest speed:\n${highestSpeed.toStringAsFixed(2)} m/s",
+              "Highest speed:\n${highestSpeed.toStringAsFixed(2)} mph",
               style: const TextStyle(
                 color: Colors.white,
               ),
