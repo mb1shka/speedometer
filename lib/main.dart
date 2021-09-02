@@ -2,6 +2,7 @@ import 'package:speedometer/pages/settings_page.dart';
 import 'package:speedometer/pages/speedometer_page.dart';
 
 import 'package:flutter/material.dart';
+import 'package:speedometer/pages/statistics_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,12 +49,7 @@ class _TheOnlyWidgetState extends State<TheOnlyWidget> {
 
 
   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Statistics',
-    ),
-    /*Text(
-      'Index 1: Speedometer',
-    ),*/
+    StatisticsPage(),
     SpeedometerPage(),
     SettingsPage(),
     //TODO: вместо текстовых виджетов добавить в список три разных страницы
