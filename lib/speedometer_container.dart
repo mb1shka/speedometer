@@ -70,8 +70,57 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
+          Align(
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text("HUD"),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shadowColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            alignment: Alignment(-0.9, -0.9),
+          ),
+          Align(
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Icon(Icons.refresh_outlined),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shadowColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            alignment: Alignment(0.9, -0.9),
+          ),
           Container(
-            padding: const EdgeInsets.only(bottom: 70),
+            padding: const EdgeInsets.only(bottom: 120),
+            alignment: Alignment.bottomCenter,
+
+            child: Text(
+              "Time:\n00:00:00",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+              ),
+              textAlign: TextAlign.center,
+            )
+          ),
+          Container(
+            padding: const EdgeInsets.only(bottom: 50),
             alignment: Alignment.bottomCenter,
 
             child: Text(
@@ -86,6 +135,19 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             child: Speedometer(
               speed: speed,
               speedRecord: highestSpeed,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 320),
+            alignment: Alignment.topCenter,
+
+            child: Text(
+              "mph",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           Container(
