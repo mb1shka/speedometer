@@ -1,9 +1,7 @@
-import 'dart:async';/*
-import 'dart:math';*/
-import 'package:flutter/material.dart';/*
-import 'package:sensors/sensors.dart';*/
-import 'package:speedometer/speedometer.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:speedometer/widgets/speedometer/speedometer.dart';
 
 class SpeedometerContainer extends StatefulWidget {
   @override

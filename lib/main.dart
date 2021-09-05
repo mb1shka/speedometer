@@ -1,6 +1,5 @@
 import 'package:speedometer/pages/settings_page.dart';
 import 'package:speedometer/pages/speedometer_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:speedometer/pages/statistics_page.dart';
 
@@ -9,15 +8,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  //в примере на сайте в первоначальном виджете идет почему-то только название
-  //я хз как это работает, но ладно, будем делать матрёшку
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //тут только тайтл, в виджет вложенный виджет уже с боттомбаром
-
       title: "Speedometer",
         theme: ThemeData(
         primarySwatch: Colors.red,
@@ -52,7 +47,6 @@ class _TheOnlyWidgetState extends State<TheOnlyWidget> {
     StatisticsPage(),
     SpeedometerPage(),
     SettingsPage(),
-    //TODO: вместо текстовых виджетов добавить в список три разных страницы
   ];
   //тут мы сделали список виджетов, которые пока что будут нам заменять страницы,
   //так как я не успеваю со всем разобраться. позже аменю виджеты на страницы
@@ -60,14 +54,10 @@ class _TheOnlyWidgetState extends State<TheOnlyWidget> {
 
   @override
   Widget build(BuildContext context) {
-    //я не помню, но, возможно, надо заменить на MaterialApp(),
-    //хз, короче, я не соображаю уже
     return Scaffold(
       body: Container(
         child: _widgetOptions.elementAt(_currentIndex),
       ),
-      //в центре у нас стоит тот виджет, индекс которого соответствует
-      //индексу нажатой нами иконки на боттомбаре
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

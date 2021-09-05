@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speedometer/speed_painter.dart';
+import 'package:speedometer/widgets/speedometer/speed_painter.dart';
 
 class Speedometer extends StatelessWidget {
 
