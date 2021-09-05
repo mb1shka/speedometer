@@ -1,7 +1,7 @@
-import 'package:speedometer/pages/settings_page.dart';
-import 'package:speedometer/pages/speedometer_page.dart';
+import 'package:location/location.dart';
 import 'package:flutter/material.dart';
-import 'package:speedometer/pages/statistics_page.dart';
+import 'package:provider/provider.dart';
+import 'package:speedometer/widgets/bottom_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,67 +18,83 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-      home: TheOnlyWidget(), //да, боттомбар именно тут
+      home: MyWidget(), //да, боттомбар именно тут
     );
   }
 }
 
-class TheOnlyWidget extends StatefulWidget {
-  const TheOnlyWidget({Key? key}) : super(key: key);
-
+class MyWidget extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _TheOnlyWidgetState();
+  State<StatefulWidget> createState() => _MyWidget();
 }
 
-class _TheOnlyWidgetState extends State<TheOnlyWidget> {
-  //наш основной виджет, который будет содержать в себе BottomNavigationBar,
-  //в котором уже будут переключаться страницы в зависимости от выбора иконки
+class _MyWidget extends State<MyWidget> {
+  double speed = 0.0;
+  double highestSpeed = 0.0;
 
-  int _currentIndex = 1;
-  void _onItemTapped(int index) {
+  Location location = new Location();
+
+  //НОВЫЙ ВАРИАНТ С БИБЛИОТЕКОЙ ЛОКАЦИИ
+
+  Future<void> _serviceEnabled() async {
+    //In order to request location, you should always check Location Service status and Permission status manually
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+    //here we make sure the location service is enabled
+    //by checking serviceEnabled
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    //here we are asking for permission to get the device's location
+
+    _locationData = await location.getLocation();
+    //contains data about the device's location, including speed in meters/second
+  }
+
+  void _speedTracking(LocationData currentLocation) {
     setState(() {
-      _currentIndex = index;
+      speed = currentLocation.speed!;
+      if (speed > highestSpeed) {
+        highestSpeed = speed;
+      }
     });
   }
-  //в этом куске кода - текущий индекс иконки и его смена при нажатии
 
-
-  static List<Widget> _widgetOptions = <Widget>[
-    StatisticsPage(),
-    SpeedometerPage(),
-    SettingsPage(),
-  ];
-  //тут мы сделали список виджетов, которые пока что будут нам заменять страницы,
-  //так как я не успеваю со всем разобраться. позже аменю виджеты на страницы
+  @override
+  void initState() {
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      _speedTracking(currentLocation);
+    });
+    super.initState();
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: _widgetOptions.elementAt(_currentIndex),
-      ),
-
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-          onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_outlined),
-            label: "Statistics",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.speed_outlined),
-            label: "Speedometer",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: "Profile",
-          ),
-        ],
+    return MultiProvider(
+      providers: [
+        Provider<double>(create: (context) => speed),
+        Provider<double>(create: (context) => highestSpeed),
+      ],
+      child: Scaffold(
+        body: BottomBar(),
       ),
     );
   }
 
 }
+

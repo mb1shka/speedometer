@@ -1,7 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:speedometer/widgets/speedometer/speedometer.dart';
+import 'package:provider/provider.dart';
 
 class SpeedometerContainer extends StatefulWidget {
   @override
@@ -9,61 +8,13 @@ class SpeedometerContainer extends StatefulWidget {
 }
 
 class _SpeedometerContainerState extends State<SpeedometerContainer> {
-  double speed = 0.0;
-  double highestSpeed = 0.0;
-
-  Location location = new Location();
-
-  //НОВЫЙ ВАРИАНТ С БИБЛИОТЕКОЙ ЛОКАЦИИ
-
-  Future<void> _serviceEnabled() async {
-    //In order to request location, you should always check Location Service status and Permission status manually
-    bool _serviceEnabled;
-    PermissionStatus _permissionGranted;
-    LocationData _locationData;
-
-    _serviceEnabled = await location.serviceEnabled();
-    if (!_serviceEnabled) {
-      _serviceEnabled = await location.requestService();
-      if (!_serviceEnabled) {
-        return;
-      }
-    }
-    //here we make sure the location service is enabled
-    //by checking serviceEnabled
-
-    _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == PermissionStatus.denied) {
-      _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != PermissionStatus.granted) {
-        return;
-      }
-    }
-    //here we are asking for permission to get the device's location
-
-    _locationData = await location.getLocation();
-    //contains data about the device's location, including speed in meters/second
-  }
-
-  void _speedTracking(LocationData currentLocation) {
-    setState(() {
-      speed = currentLocation.speed!;
-      if (speed > highestSpeed) {
-        highestSpeed = speed;
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      _speedTracking(currentLocation);
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+
+    double speed = context.watch<double>();
+    double highestSpeed = context.watch<double>();
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -130,10 +81,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             ),
           ),
           Center(
-            child: Speedometer(
-              speed: speed,
-              speedRecord: highestSpeed,
-            ),
+            child: Speedometer(),
           ),
           Container(
             padding: const EdgeInsets.only(top: 320),

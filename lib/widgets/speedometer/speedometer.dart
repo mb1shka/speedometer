@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:speedometer/widgets/speedometer/speed_painter.dart';
+import 'package:provider/provider.dart';
 
 class Speedometer extends StatelessWidget {
 
   //speedometer widget
 
-  Speedometer({
+  Speedometer({/*
     required this.speed,
-    required this.speedRecord,
+    required this.speedRecord,*/
     this.size = 200
   });
 
-  final double speed;
-  final double speedRecord;
   final double size;
 
   @override
   Widget build(BuildContext context) {
+
+    double speed = context.watch<double>();
+    double speedRecord = context.watch<double>();
+
     return CustomPaint(
       size: Size(size, size),
       painter: SpeedPainter(
