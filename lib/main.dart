@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedometer/widgets/bottom_bar.dart';
 
+import 'data.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -12,14 +14,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider<Data>(
+      //ChangeNotifierProvider наблюдает, что поменялось в нашем классе
+      create: (context) => Data(),
+        child: MaterialApp(
+          title: "Speedometer",
+          theme: ThemeData(
+            primarySwatch: Colors.red,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+          home: MyWidget(), //да, боттомбар именно тут
+        ),
+    );
+    /*return MaterialApp(
       title: "Speedometer",
         theme: ThemeData(
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
       home: MyWidget(), //да, боттомбар именно тут
-    );
+    );*/
   }
 }
 
@@ -29,8 +43,8 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidget extends State<MyWidget> {
-  double speed = 0.0;
-  double highestSpeed = 0.0;
+  //double speed = 0.0;
+  //double highestSpeed = 0.0;
 
   Location location = new Location();
 
@@ -65,34 +79,32 @@ class _MyWidget extends State<MyWidget> {
     //contains data about the device's location, including speed in meters/second
   }
 
-  @override
+  /*@override
   void initState() {
     location.onLocationChanged.listen((LocationData currentLocation) {
       _speedTracking(currentLocation);
     });
     super.initState();
-  }
+  }*/
 
-  void _speedTracking(LocationData currentLocation) {
-    setState(() {
-      speed = currentLocation.speed!;
-      if (speed > highestSpeed) {
+  void _speedTracking(BuildContext context, LocationData currentLocation) {
+      double speed = currentLocation.speed!;
+
+      context.read<Data>().changeSpeed(speed);
+
+      /*if (speed > highestSpeed) {
         highestSpeed = speed;
-      }
+      }*/
       //print("update speed $speed");
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<double>.value(value: speed),
-        Provider<double>(create: (context) => highestSpeed),
-      ],
-      child: Scaffold(
+    location.onLocationChanged.listen((LocationData currentLocation) {
+      _speedTracking(context, currentLocation);
+    });
+    return Scaffold(
         body: BottomBar(),
-      ),
     );
   }
 

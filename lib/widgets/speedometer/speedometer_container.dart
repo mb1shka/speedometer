@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:speedometer/widgets/speedometer/speedometer.dart';
 import 'package:provider/provider.dart';
 
+import '../../data.dart';
+
 class SpeedometerContainer extends StatefulWidget {
   @override
   _SpeedometerContainerState createState() => _SpeedometerContainerState();
@@ -12,8 +14,8 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
   @override
   Widget build(BuildContext context) {
 
-    double speed = context.watch<double>();
-    double highestSpeed = context.watch<double>();
+    //double speed = context.watch<double>();
+    double highestSpeed = 0.0;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -100,7 +102,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             padding: const EdgeInsets.fromLTRB(0.0, 200, 0.0, 0.0),
             alignment: Alignment.center,
             child: Text(
-              "${speed.toStringAsFixed(2)}",
+              "${context.watch<Data>().getSpeed.toStringAsFixed(2)}",
               style: const TextStyle(color: Colors.white, fontSize: 50),
               textAlign: TextAlign.end,
             ),
