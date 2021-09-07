@@ -21,7 +21,7 @@ class Speedometer extends StatelessWidget {
     double speed = context.watch<Data>().getSpeed;
     //наблюдаем за изменениями
     //double speedRecord = context.watch<double>();
-    double speedRecord = 0.0;
+    double speedRecord = context.watch<Data>().getHighestSpeed;
 
     //print("speed $speed");
     return CustomPaint(

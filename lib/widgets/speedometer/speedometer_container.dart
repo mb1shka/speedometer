@@ -15,7 +15,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
   Widget build(BuildContext context) {
 
     //double speed = context.watch<double>();
-    double highestSpeed = 0.0;
+    //double highestSpeed = 0.0;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -75,7 +75,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             alignment: Alignment.bottomCenter,
 
             child: Text(
-              "Highest speed:\n${highestSpeed.toStringAsFixed(2)} mph",
+              "Highest speed:\n${context.watch<Data>().getHighestSpeed.toStringAsFixed(2)} mph",
               style: const TextStyle(
                 color: Colors.white,
               ),

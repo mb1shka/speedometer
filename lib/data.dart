@@ -9,10 +9,13 @@ class Data with ChangeNotifier {
 
   //геттер скорости
   double get getSpeed => _speed;
+  double get getHighestSpeed => _highestSpeed;
 
   void changeSpeed(double newSpeed) {
     _speed = newSpeed;
-
+    if (_speed > _highestSpeed) {
+      _highestSpeed = _speed;
+    }
     notifyListeners();
   }
 

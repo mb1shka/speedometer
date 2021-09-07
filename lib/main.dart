@@ -87,6 +87,7 @@ class _MyWidget extends State<MyWidget> {
     super.initState();
   }*/
 
+  //ТУТ ИЗМЕНЕНИЕ СКОРОСТИ И МАКСИМАЛЬНОЙ СКОРОСТИ
   void _speedTracking(BuildContext context, LocationData currentLocation) {
       double speed = currentLocation.speed!;
 
