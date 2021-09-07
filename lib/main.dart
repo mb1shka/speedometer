@@ -8,7 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  //const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,15 +65,6 @@ class _MyWidget extends State<MyWidget> {
     //contains data about the device's location, including speed in meters/second
   }
 
-  void _speedTracking(LocationData currentLocation) {
-    setState(() {
-      speed = currentLocation.speed!;
-      if (speed > highestSpeed) {
-        highestSpeed = speed;
-      }
-    });
-  }
-
   @override
   void initState() {
     location.onLocationChanged.listen((LocationData currentLocation) {
@@ -82,12 +73,21 @@ class _MyWidget extends State<MyWidget> {
     super.initState();
   }
 
+  void _speedTracking(LocationData currentLocation) {
+    setState(() {
+      speed = currentLocation.speed!;
+      if (speed > highestSpeed) {
+        highestSpeed = speed;
+      }
+      //print("update speed $speed");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<double>(create: (context) => speed),
+        Provider<double>.value(value: speed),
         Provider<double>(create: (context) => highestSpeed),
       ],
       child: Scaffold(

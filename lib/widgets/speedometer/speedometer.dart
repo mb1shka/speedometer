@@ -20,6 +20,7 @@ class Speedometer extends StatelessWidget {
     double speed = context.watch<double>();
     double speedRecord = context.watch<double>();
 
+    //print("speed $speed");
     return CustomPaint(
       size: Size(size, size),
       painter: SpeedPainter(
