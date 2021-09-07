@@ -70,7 +70,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
               textAlign: TextAlign.center,
             )
           ),
-          Container(
+          /*Container(
             padding: const EdgeInsets.only(bottom: 50),
             alignment: Alignment.bottomCenter,
 
@@ -81,7 +81,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
               ),
               textAlign: TextAlign.center,
             ),
-          ),
+          ),*/
           Center(
             child: Speedometer(),
           ),
