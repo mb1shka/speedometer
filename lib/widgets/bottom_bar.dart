@@ -14,7 +14,7 @@ class _BottomBarState extends State<BottomBar> {
   //виджет, который будет содержать в себе BottomNavigationBar,
   //в котором уже будут переключаться страницы в зависимости от выбора иконки
 
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -23,8 +23,8 @@ class _BottomBarState extends State<BottomBar> {
   //в этом куске кода - текущий индекс иконки и его смена при нажатии
 
   static List<Widget> _widgetOptions = <Widget>[
-    StatisticsPage(),
     SpeedometerPage(),
+    StatisticsPage(),
     SettingsPage(),
   ];
   //тут мы сделали список виджетов, которые пока что будут нам заменять страницы,
@@ -45,12 +45,12 @@ class _BottomBarState extends State<BottomBar> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer_outlined),
-            label: "Statistics",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.speed_outlined),
             label: "Speedometer",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.equalizer_outlined),
+            label: "Statistics",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../data.dart';
 
 class StatisticsContainer extends StatefulWidget {
   @override
@@ -130,7 +133,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 5,
                     child: Text(
-                      "Highest Speed",
+                      "Top Speed",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
@@ -140,7 +143,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "0.00 mph",
+                      "${context.watch<Data>().getHighestSpeed.toStringAsFixed(2)} mph",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
