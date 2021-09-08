@@ -1,7 +1,9 @@
 import 'dart:async';
 
-class Timer {
-  late Duration _time;
+import 'package:flutter/cupertino.dart';
+
+class Timer with ChangeNotifier{
+  Duration _time = new Duration();
 
   Duration get getDuration => _time;
 
@@ -15,6 +17,7 @@ class Timer {
       DateTime currentTime = DateTime.now();
       Duration duration = currentTime.difference(startTime);
       _time = duration;
+      notifyListeners();
     });
   }
 }

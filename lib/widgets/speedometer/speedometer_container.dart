@@ -11,14 +11,21 @@ class SpeedometerContainer extends StatefulWidget {
 }
 
 class _SpeedometerContainerState extends State<SpeedometerContainer> {
-
+/*
   Duration _duration = new Duration();
+  Timer _timer = new Timer();*/
+  //
+
+  void _timeTracking() {
+    context.read<Timer>().countDuration();
+  }
 
   @override
   Widget build(BuildContext context) {
-
     //double speed = context.watch<double>();
     //double highestSpeed = 0.0;
+    /*Duration _duration = new Duration();
+    Timer _timer = new Timer();*/
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -45,10 +52,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
           Align(
             child: ElevatedButton(
               onPressed: () {
-                Timer timer = new Timer();
-                timer.countDuration();
                 setState(() {
-                  _duration = timer.getDuration;
                 });
               },
               child: Icon(Icons.refresh_outlined),
@@ -71,7 +75,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             alignment: Alignment.bottomCenter,
 
             child: Text(
-              "Time:\n${_duration}",
+              "Time:\n${context.watch<Timer>().getDuration}",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -79,18 +83,35 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
               textAlign: TextAlign.center,
             )
           ),
-          /*Container(
+          Container(
             padding: const EdgeInsets.only(bottom: 50),
             alignment: Alignment.bottomCenter,
 
-            child: Text(
+            child: ElevatedButton(
+              onPressed: () {
+                _timeTracking();
+              },
+              child: Text("Start"),
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                shadowColor: MaterialStateProperty.all<Color>(Colors.deepPurple),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            /*Text(
               "Highest speed:\n${context.watch<Data>().getHighestSpeed.toStringAsFixed(2)} mph",
               style: const TextStyle(
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
-            ),
-          ),*/
+            ),*/
+          ),
           Center(
             child: Speedometer(),
           ),

@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:speedometer/timer.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +17,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Data>(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Data>(create: (context) => Data()),
+        ChangeNotifierProvider<Timer>(create: (context) => Timer()),
+        ],
+      child: MaterialApp(
+        title: "Speedometer",
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: MyWidget(), //да, боттомбар именно тут
+      ),
+    );
+      ChangeNotifierProvider<Data>(
       //ChangeNotifierProvider наблюдает, что поменялось в нашем классе
       create: (context) => Data(),
         child: MaterialApp(
@@ -26,14 +43,6 @@ class MyApp extends StatelessWidget {
           home: MyWidget(), //да, боттомбар именно тут
         ),
     );
-    /*return MaterialApp(
-      title: "Speedometer",
-        theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-      home: MyWidget(), //да, боттомбар именно тут
-    );*/
   }
 }
 
@@ -98,6 +107,7 @@ class _MyWidget extends State<MyWidget> {
       }*/
       //print("update speed $speed");
   }
+
 
   @override
   Widget build(BuildContext context) {
