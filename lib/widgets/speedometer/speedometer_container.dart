@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:speedometer/timer.dart';
 import 'package:speedometer/widgets/speedometer/speedometer.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,8 @@ class SpeedometerContainer extends StatefulWidget {
 }
 
 class _SpeedometerContainerState extends State<SpeedometerContainer> {
+
+  Duration _duration = new Duration();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,13 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
           ),
           Align(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Timer timer = new Timer();
+                timer.countDuration();
+                setState(() {
+                  _duration = timer.getDuration;
+                });
+              },
               child: Icon(Icons.refresh_outlined),
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
@@ -62,7 +71,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             alignment: Alignment.bottomCenter,
 
             child: Text(
-              "Time:\n00:00:00",
+              "Time:\n${_duration}",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
