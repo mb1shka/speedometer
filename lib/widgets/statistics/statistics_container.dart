@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:provider/provider.dart';
 import '../../data.dart';
+import '../../timer.dart';
 
 class StatisticsContainer extends StatefulWidget {
   @override
@@ -107,7 +108,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "00:00:00",
+                      "${context.watch<Timer>().getDuration}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
