@@ -13,7 +13,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  //const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +30,6 @@ class MyApp extends StatelessWidget {
         home: MyWidget(), //да, боттомбар именно тут
       ),
     );
-      ChangeNotifierProvider<Data>(
-      //ChangeNotifierProvider наблюдает, что поменялось в нашем классе
-      create: (context) => Data(),
-        child: MaterialApp(
-          title: "Speedometer",
-          theme: ThemeData(
-            primarySwatch: Colors.red,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-          home: MyWidget(), //да, боттомбар именно тут
-        ),
-    );
   }
 }
 
@@ -52,8 +39,6 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidget extends State<MyWidget> {
-  //double speed = 0.0;
-  //double highestSpeed = 0.0;
 
   Location location = new Location();
 
@@ -88,24 +73,10 @@ class _MyWidget extends State<MyWidget> {
     //contains data about the device's location, including speed in meters/second
   }
 
-  /*@override
-  void initState() {
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      _speedTracking(currentLocation);
-    });
-    super.initState();
-  }*/
-
   //ТУТ ИЗМЕНЕНИЕ СКОРОСТИ И МАКСИМАЛЬНОЙ СКОРОСТИ
   void _speedTracking(BuildContext context, LocationData currentLocation) {
       double speed = currentLocation.speed!;
-
       context.read<Data>().changeSpeed(speed);
-
-      /*if (speed > highestSpeed) {
-        highestSpeed = speed;
-      }*/
-      //print("update speed $speed");
   }
 
 

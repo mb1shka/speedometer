@@ -11,22 +11,19 @@ class SpeedometerContainer extends StatefulWidget {
 }
 
 class _SpeedometerContainerState extends State<SpeedometerContainer> {
-/*
-  Duration _duration = new Duration();
-  Timer _timer = new Timer();*/
-  //
+
+  //bool isReset = false;
 
   void _timeTracking() {
-    context.read<Timer>().countDuration();
+    //if (isReset == false) {
+      context.read<Timer>().countDuration();
+    /*} else {
+      context.read<Timer>().countDuration();
+    }*/
   }
 
   @override
   Widget build(BuildContext context) {
-    //double speed = context.watch<double>();
-    //double highestSpeed = 0.0;
-    /*Duration _duration = new Duration();
-    Timer _timer = new Timer();*/
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -52,8 +49,10 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
           Align(
             child: ElevatedButton(
               onPressed: () {
-                setState(() {
-                });
+                /*setState(() {
+                  isReset = true;
+                });*/
+                _timeTracking();
               },
               child: Icon(Icons.refresh_outlined),
               style: ButtonStyle(
