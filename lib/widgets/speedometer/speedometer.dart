@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speedometer/data.dart';
+import 'package:speedometer/listeners/speed_listener.dart';
 import 'package:speedometer/widgets/speedometer/speed_painter.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +18,10 @@ class Speedometer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double speed = context.watch<Data>().getSpeed;
+    double speed = context.watch<SpeedListener>().getSpeed;
     //наблюдаем за изменениями
     //double speedRecord = context.watch<double>();
-    double speedRecord = context.watch<Data>().getHighestSpeed;
+    double speedRecord = context.watch<SpeedListener>().getHighestSpeed;
 
     //print("speed $speed");
     return CustomPaint(

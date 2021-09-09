@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:speedometer/timer.dart';
+import 'package:speedometer/listeners/timer_listener.dart';
 import 'package:location/location.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedometer/widgets/bottom_bar.dart';
 
-import 'data.dart';
+import 'listeners/speed_listener.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<Data>(create: (context) => Data()),
-        ChangeNotifierProvider<Timer>(create: (context) => Timer()),
+        ChangeNotifierProvider<SpeedListener>(create: (context) => SpeedListener()),
+        ChangeNotifierProvider<TimerListener>(create: (context) => TimerListener()),
         ],
       child: MaterialApp(
         title: "Speedometer",
@@ -76,7 +76,8 @@ class _MyWidget extends State<MyWidget> {
   //ТУТ ИЗМЕНЕНИЕ СКОРОСТИ И МАКСИМАЛЬНОЙ СКОРОСТИ
   void _speedTracking(BuildContext context, LocationData currentLocation) {
       double speed = currentLocation.speed!;
-      context.read<Data>().changeSpeed(speed);
+      context.read<SpeedListener>().changeSpeed(speed);
+      //можно добавить чтение нового метода, находящего среднее значение скорости
   }
 
 

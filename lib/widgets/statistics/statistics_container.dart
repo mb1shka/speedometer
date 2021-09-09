@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:provider/provider.dart';
-import '../../data.dart';
-import '../../timer.dart';
+import '../../listeners/speed_listener.dart';
+import '../../listeners/timer_listener.dart';
 
 class StatisticsContainer extends StatefulWidget {
   @override
@@ -72,7 +71,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "0 mi",
+                      "${context.watch<SpeedListener>().getDistance} mi",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -108,7 +107,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "${context.watch<Timer>().getDuration}",
+                      "${context.watch<TimerListener>().getDurationAsString}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -144,7 +143,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "${context.watch<Data>().getHighestSpeed.toStringAsFixed(2)} mph",
+                      "${context.watch<SpeedListener>().getHighestSpeed.toStringAsFixed(2)} mph",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -180,7 +179,7 @@ class _SettingsWidget extends State<SettingsWidget> {
                   Expanded(
                     flex: 2,
                     child: Text(
-                      "0.00 mph",
+                      "${context.watch<SpeedListener>().getAVGSpeed.toStringAsFixed(2)}mph",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

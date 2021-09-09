@@ -2,20 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 
-class Timer with ChangeNotifier{
+class TimerListener with ChangeNotifier{
   Duration _time = new Duration();
   String _formatTime = " ";
 
-  String get getDuration => _formatTime;
-  //set setDuration(Duration duration) => _time = const Duration(microseconds: 0);
+  Duration get getDuration => _time;
+  String get getDurationAsString => _formatTime;
 
   DateTime startTime = DateTime.now();
   DateTime get getDateTime => startTime;
 
   StreamSubscription? _timer;
   final interval = const Duration(seconds: 1);
-
-  //format(Duration duration) => duration.toString().substring(0,7);
 
   void countDuration() {
     startTime = DateTime.now();

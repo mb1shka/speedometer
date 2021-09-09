@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:speedometer/timer.dart';
+import 'package:speedometer/listeners/timer_listener.dart';
 import 'package:speedometer/widgets/speedometer/speedometer.dart';
 import 'package:provider/provider.dart';
 
-import '../../data.dart';
+import '../../listeners/speed_listener.dart';
 
 class SpeedometerContainer extends StatefulWidget {
   @override
@@ -12,14 +12,11 @@ class SpeedometerContainer extends StatefulWidget {
 
 class _SpeedometerContainerState extends State<SpeedometerContainer> {
 
-  //bool isReset = false;
 
   void _timeTracking() {
-    //if (isReset == false) {
-      context.read<Timer>().countDuration();
-    /*} else {
-      context.read<Timer>().countDuration();
-    }*/
+      context.read<TimerListener>().countDuration();
+      context.read<SpeedListener>().countAVGSpeed();
+      context.read<SpeedListener>().countDistance(context.watch<TimerListener>().getDuration);
   }
 
   @override
@@ -49,9 +46,6 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
           Align(
             child: ElevatedButton(
               onPressed: () {
-                /*setState(() {
-                  isReset = true;
-                });*/
                 _timeTracking();
               },
               child: Icon(Icons.refresh_outlined),
@@ -74,7 +68,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             alignment: Alignment.bottomCenter,
 
             child: Text(
-              "Time:\n${context.watch<Timer>().getDuration}",
+              "Time:\n${context.watch<TimerListener>().getDurationAsString}",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 28,
@@ -131,7 +125,7 @@ class _SpeedometerContainerState extends State<SpeedometerContainer> {
             padding: const EdgeInsets.fromLTRB(0.0, 200, 0.0, 0.0),
             alignment: Alignment.center,
             child: Text(
-              "${context.watch<Data>().getSpeed.toStringAsFixed(2)}",
+              "${context.watch<SpeedListener>().getSpeed.toStringAsFixed(2)}",
               style: const TextStyle(color: Colors.white, fontSize: 50),
               textAlign: TextAlign.end,
             ),
